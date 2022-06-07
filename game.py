@@ -1,5 +1,7 @@
+import os	
 import random
 import math
+from actions import *
 
 class Fomo:
 	def __init__(self, name, lk):
@@ -10,6 +12,7 @@ class Fomo:
 		self.hp = 100
 		self.cash = 0
 		self.happiness = 30 
+		self.job = "Unemployed"
 	
 	def lk_roll(bonus):
 		lk = random.randrange(0, self.lk)
@@ -19,6 +22,7 @@ def stat_out(fomo):
 	print("hp:", fomo.hp)
 	print("cash:", fomo.cash)
 	print("happiness:", fomo.happiness)
+	print("job:", fomo.job)
 
 def game_over(fomo):
 	sys.exit()
@@ -55,6 +59,8 @@ days = 1 # get days in
 # day loop
 while 1:
 	# day begin
+	os.system("clear")
+
 	print("A new day for:", fomo.name)
 	suicide_check(fomo)	
 	stat_out(fomo)
@@ -62,6 +68,14 @@ while 1:
 	input()
 	
 	# action phase
+	action = input("What will you do today?\n")
 
+	# jobs
+	if action == "job":
+		job_market = Job_Market(fomo)
+		# print(job_market.job_list)
+		job_market.find_job(fomo)
+		
+	action = ""
 	# day end
 	days = days + 1 
