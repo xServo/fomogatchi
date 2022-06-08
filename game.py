@@ -2,17 +2,19 @@ import os
 import random
 import math
 from actions import *
+from premisses import *
 
 class Fomo:
-	def __init__(self, name, lk):
+	def __init__(self, name):
 		self.name = name	
 		
 		# stats
-		self.lk = lk
 		self.hp = 100
+		self.lk = 0
 		self.cash = 0
-		self.happiness = 30 
+		self.happiness = 50
 		self.job = "Unemployed"
+		self.residence = "Homeless"
 	
 	def lk_roll(bonus):
 		lk = random.randrange(0, self.lk)
@@ -53,9 +55,14 @@ def get_date(days):
 # prep fomo loop
 name = input("What is your Fomo's name?\n") # get name
 starting_luck = 30 # get luck ? more stats ?
-fomo = Fomo(name, starting_luck) # init fomo class
-days = 1 # get days in
+fomo = Fomo(name) # init fomo class
 
+# premise is selected
+# TODO ask for options
+premise = Premise_Studio(fomo)
+premise_selector(premise, fomo)
+
+days = 1 # get days in
 # day loop
 while 1:
 	# day begin
@@ -70,11 +77,12 @@ while 1:
 	# action phase
 	action = input("What will you do today?\n")
 
-	# jobs
+	"""# jobs
 	if action == "job":
 		job_market = Job_Market(fomo)
 		# print(job_market.job_list)
 		job_market.find_job(fomo)
+	"""
 		
 	action = ""
 	# day end
